@@ -54,6 +54,21 @@ cargo test
 cargo run -- recognize path/to/image.png
 ```
 
+## 📂 Dataset
+
+This project uses the **MNIST handwritten digit dataset** as training and testing data.
+The dataset files are downloaded from a [GitHub mirror](https://github.com/fgnt/mnist):
+
+* [train-images-idx3-ubyte.gz](https://raw.githubusercontent.com/fgnt/mnist/master/train-images-idx3-ubyte.gz) – Training images (60,000 examples)
+* [train-labels-idx1-ubyte.gz](https://raw.githubusercontent.com/fgnt/mnist/master/train-labels-idx1-ubyte.gz) – Labels for the training images
+* [t10k-images-idx3-ubyte.gz](https://raw.githubusercontent.com/fgnt/mnist/master/t10k-images-idx3-ubyte.gz) – Test images (10,000 examples)
+* [t10k-labels-idx1-ubyte.gz](https://raw.githubusercontent.com/fgnt/mnist/master/t10k-labels-idx1-ubyte.gz) – Labels for the test images
+
+### Purpose of each file
+
+* **Training set (`train-*`)**: Used to train the machine learning model.
+* **Test set (`t10k-*`)**: Used only after training to evaluate model accuracy and generalization.
+
 ## 🗺️ Roadmap
 
 ### Phase 1: Foundation (Current)

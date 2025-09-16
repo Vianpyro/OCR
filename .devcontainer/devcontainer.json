@@ -1,0 +1,19 @@
+{
+    "name": "Template Development Container",
+    "dockerFile": "Dockerfile",
+    "customizations": {
+        "settings": {
+            "terminal.integrated.shell.linux": "/bin/bash"
+        },
+        "vscode": {
+            "extensions": [
+                "fill-labs.dependi",
+                "tamasfe.even-better-toml",
+                "rust-lang.rust-analyzer",
+                "vadimcn.vscode-lldb"
+            ]
+        }
+    },
+    "postStartCommand": "cargo update",
+    "remoteUser": "vscode"
+}
