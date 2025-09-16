@@ -10,8 +10,49 @@ This project represents my first significant undertaking that combines two areas
 
 The primary objective is to build an OCR system capable of recognizing handwritten and printed numbers (0-9), serving as a foundation for more complex character recognition in the future.
 
+## 🧠 How It Works (Current Implementation)
+
+Right now, the project implements a **simple neural network without hidden layers** — essentially a **logistic regression classifier with softmax**.
+
+### Network Architecture
+- **Input layer**:
+  - Each image is `28x28` pixels (`784` values in total).
+  - Pixel values are normalized to the range `0.0–1.0`.
+
+- **Output layer**:
+  - 10 neurons (one for each digit `0–9`).
+  - Each neuron has its own set of `784` weights + a bias.
+  - Outputs are passed through **softmax** to get probabilities.
+
+### Training
+- Uses the **MNIST dataset** (handwritten digits).
+- For each training image:
+  1. Normalize pixel values.
+  2. Perform forward pass to compute predictions.
+  3. Compare predictions to the true label (one-hot encoded).
+  4. Compute **cross-entropy loss**.
+  5. Update weights and biases using **gradient descent**.
+
+- The gradient simplifies nicely for softmax + cross-entropy, so the weight updates are straightforward:
+```
+
+weight += learning\_rate \* (target - prediction) \* input
+bias   += learning\_rate \* (target - prediction)
+
+```
+
+### Prediction
+- Given an image, the network computes probabilities for digits `0–9`.
+- The digit with the highest probability is returned as the prediction.
+
+### Evaluation
+- A `test_accuracy` method compares predictions against labels from the test dataset and returns the overall accuracy as a percentage.
+
+---
+
 ## 🚀 Features (Planned)
 
+- [x] **Basic Neural Network** (single-layer, no hidden layers)
 - [ ] **Number Recognition**: Detect and classify digits 0-9 from images
 - [ ] **Image Preprocessing**: Basic image enhancement and noise reduction
 - [ ] **Machine Learning Integration**: Implement or integrate ML models for character recognition
@@ -23,7 +64,7 @@ The primary objective is to build an OCR system capable of recognizing handwritt
 
 - **Language**: Rust
 - **Image Processing**: (To be determined - considering `image` crate)
-- **Machine Learning**: (Exploring options like `candle-rs`, `tch`, or `onnxruntime`)
+- **Machine Learning (custom)**: Single-layer neural network implemented from scratch
 - **CLI Framework**: (Considering `clap` for command-line interface)
 
 ## 📋 Prerequisites
@@ -73,17 +114,18 @@ The dataset files are downloaded from a [GitHub mirror](https://github.com/fgnt/
 
 ### Phase 1: Foundation (Current)
 - [x] Project setup and documentation
+- [x] Implement basic single-layer neural network (input → output, no hidden layers)
 - [ ] Choose and integrate image processing libraries
 - [ ] Implement basic image loading and preprocessing
 
 ### Phase 2: Basic Recognition
-- [ ] Implement simple template matching for digits
-- [ ] Create training data collection system
-- [ ] Basic digit classification
+- [x] Train the network with MNIST
+- [x] Evaluate accuracy on test dataset
+- [ ] Expose digit recognition through CLI
 
 ### Phase 3: Machine Learning
-- [ ] Integrate machine learning framework
-- [ ] Train custom models for digit recognition
+- [ ] Add **hidden layers** (multilayer perceptron)
+- [ ] Experiment with different activation functions (ReLU, tanh)
 - [ ] Improve accuracy through feature engineering
 
 ### Phase 4: Enhancement
@@ -95,7 +137,7 @@ The dataset files are downloaded from a [GitHub mirror](https://github.com/fgnt/
 
 This project is designed as a learning experience to:
 - Master Rust ownership, borrowing, and memory management
-- Understand computer vision and image processing concepts
+- Understand the math behind neural networks (forward pass, softmax, cross-entropy, gradient descent)
 - Explore machine learning model integration in Rust
 - Practice software architecture and project organization
 - Learn about performance optimization in systems programming
@@ -123,7 +165,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Project Status**: 🚧 Early Development
 
-This project is in its initial stages. The README serves as both documentation and a roadmap for development. As this is a learning project, expect frequent updates, experimentation, and iterative improvements.
+Currently, the project implements a **working single-layer neural network** for digit classification, with training and testing loops. Next steps involve adding hidden layers, preprocessing, and a CLI interface.
 
 ---
 
